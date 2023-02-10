@@ -1,0 +1,25 @@
+{
+  "name": "single-chat-room",
+  "version": "0.1.0",
+  "description": "A minimal single-room chat application based on Socket.io where users can use the Local and Facebook passport strategies to join",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/othniel-agera/single-chat-room.git"
+  },
+  "keywords": [
+    "socket.io",
+    "express",
+    "mocha",
+    "passport"
+  ],
+  "author": "Othniel Agera",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/othniel-agera/single-chat-room/issues"
+  },
+  "homepage": "https://github.com/othniel-agera/single-chat-room#readme"
+}
