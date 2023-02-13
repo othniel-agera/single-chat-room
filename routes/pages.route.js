@@ -1,0 +1,20 @@
+var express = require("express");
+var router = express.Router();
+
+/* GET home page. */
+router.get("/", function (req, res, next) {
+	res.render("index", { title: "Express" });
+});
+
+/* GET login page. */
+router.get("/login", function (req, res, next) {
+	res.render("login", { title: "Express" });
+});
+
+// Render 404
+router.all("*", (req, res) => {
+	res.status(404).json({
+		message: "Invalid request, Route does not exist",
+	});
+});
+module.exports = router;
