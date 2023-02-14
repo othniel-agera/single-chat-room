@@ -2,7 +2,9 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const { comparePasswords } = require("../utils/utility.util");
 
-const { fetchUserWithPassword } = require("../lib/user.lib");
+const Userlib = require("../lib/user.lib");
+
+const { fetchUserWithPassword } = new Userlib();
 
 const localStrategy = new LocalStrategy(async function verify(
 	username,

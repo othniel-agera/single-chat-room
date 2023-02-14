@@ -3,13 +3,7 @@ const UserLib = require("../lib/user.lib");
 const asyncHandler = require("../middlewares/async.middleware");
 const ErrorResponse = require("../utils/errorResponse.util");
 
-const {
-	filterValues,
-	formatValues,
-	hashPassword,
-	comparePasswords,
-	sendTokenResponse,
-} = utility;
+const { hashPassword, comparePasswords } = utility;
 
 class AuthController {
 	constructor() {
@@ -37,7 +31,10 @@ class AuthController {
 		}
 
 		const user = await this.userLib.createUser(data, next);
-		return sendTokenResponse(user, 201, res);
+		return res.status(201).json({
+			success: true,
+			user: { id: user.id, username: user.username },
+		});
 	});
 
 	/**
@@ -61,7 +58,10 @@ class AuthController {
 		}
 		const passwordMatch = await comparePasswords(password, user.password);
 		if (passwordMatch) {
-			return sendTokenResponse(user, 200, res);
+			return res.status(200).json({
+				success: true,
+				user: { id: user.id, username },
+			});
 		}
 		return next(new ErrorResponse("Incorrect username or password", 401));
 	});

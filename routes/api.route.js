@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { passport } = require("../middlewares/passport.middleware");
+const passport = require("../middlewares/passport.middleware");
 const { signup, login } = require("../controllers/user.controller");
 const { signupValidator, loginValidator } = require("../utils/validator.util");
 
@@ -12,8 +12,16 @@ router.get("/", function (req, res) {
 	});
 });
 
-router.post("/signup", signupValidator, signup);
-router.post("/login", loginValidator, login);
+router.post("/auth/signup", signupValidator, signup);
+router.post(
+	"/auth/login",
+	loginValidator,
+	passport.authenticate("local", {
+		successReturnToOrRedirect: "/chat",
+		failureRedirect: "/login",
+		failureMessage: true,
+	})
+);
 
 router.all("*", (req, res) => {
 	res.status(404).json({
