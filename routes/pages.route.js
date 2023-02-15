@@ -8,7 +8,13 @@ router.get("/", function (req, res, next) {
 
 /* GET login page. */
 router.get("/login", function (req, res, next) {
-	res.render("login", { title: "Login" });
+	res.render("login", {
+		title: "Login",
+		errorMsg:
+			req.session.messages && req.session.messages[0]
+				? req.session.messages[0]
+				: "",
+	});
 });
 
 /* GET chat page. */
