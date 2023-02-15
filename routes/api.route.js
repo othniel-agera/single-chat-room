@@ -15,6 +15,10 @@ router.get("/", function (req, res) {
 router.post("/auth/signup", signupValidator, signup);
 router.post(
 	"/auth/login",
+	(req, res, next) => {
+		req.session.messages = undefined;
+		next();
+	},
 	loginValidator,
 	passport.authenticate("local", {
 		successReturnToOrRedirect: "/chat",
