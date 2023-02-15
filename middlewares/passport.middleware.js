@@ -1,10 +1,10 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
-const { comparePasswords } = require("../utils/utility.util");
+const { comparePasswords, hashPassword } = require("../utils/utility.util");
 
 const Userlib = require("../lib/user.lib");
 
-const { fetchUserWithPassword } = new Userlib();
+const { createUser, fetchUserWithPassword } = new Userlib();
 
 const localStrategy = new LocalStrategy(async function verify(
 	username,
@@ -12,15 +12,16 @@ const localStrategy = new LocalStrategy(async function verify(
 	cb
 ) {
 	try {
-		const user = await fetchUserWithPassword({ username });
+		let user = await fetchUserWithPassword({ username });
 		if (!user) {
-			return cb(null, false, { message: "Incorrect username or password." });
+			const encryptedPassword = await hashPassword(password);
+			user = await createUser({ username, password: encryptedPassword });
 		}
-
 		const passwordMatch = await comparePasswords(password, user.password);
 		if (passwordMatch) {
-			return cb(null, false, { message: "Incorrect username or password." });
+			return cb(null, user);
 		}
+		return cb(null, false, { message: "Incorrect username or password." });
 	} catch (err) {
 		if (err) {
 			return cb(err);
