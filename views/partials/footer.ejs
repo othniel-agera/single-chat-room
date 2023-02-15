@@ -1,6 +1,7 @@
     <!-- JAVASCRIPT -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/joi/dist/joi-browser.min.js"></script>
+    <script src="/socket.io/socket.io.js "></script>
     <!-- 
     <script src="/socket.io/socket.io.js"></script> -->
 
@@ -10,6 +11,8 @@
         <script type="text/javascript" src="/javascripts/index.js"></script>
     <% }else if(jsFile === 'login'){%>
         <script type="text/javascript" src="/javascripts/login.js"></script>
+    <% }else if(jsFile === 'chat'){%>
+        <script type="text/javascript" src="/javascripts/chat.js"></script>
     <% }%>
 
 </body>
