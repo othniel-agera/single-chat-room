@@ -7,12 +7,11 @@ if (process.env.NODE_ENV === "production" && process.env.DB_URI) {
 	uri = process.env.DB_URI;
 }
 
+mongoose.set("strictQuery", true);
 if (uri) {
 	mongoose.connect(uri, {
 		useNewUrlParser: true,
-		useCreateIndex: true,
 		useUnifiedTopology: true,
-		useFindAndModify: false,
 	});
 }
 

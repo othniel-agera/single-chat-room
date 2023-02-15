@@ -1,5 +1,9 @@
-var express = require("express");
-var router = express.Router();
+const { Router } = require("express");
+const passport = require("../middlewares/passport.middleware");
+const { signup, login } = require("../controllers/user.controller");
+const { signupValidator, loginValidator } = require("../utils/validator.util");
+
+const router = Router();
 
 /* GET users listing. */
 router.get("/", function (req, res) {
@@ -7,6 +11,21 @@ router.get("/", function (req, res) {
 		message: "Welcome to the Single-Chat-Room API",
 	});
 });
+
+router.post("/auth/signup", signupValidator, signup);
+router.post(
+	"/auth/login",
+	(req, res, next) => {
+		req.session.messages = undefined;
+		next();
+	},
+	loginValidator,
+	passport.authenticate("local", {
+		successReturnToOrRedirect: "/chat",
+		failureRedirect: "/login",
+		failureMessage: true,
+	})
+);
 
 router.all("*", (req, res) => {
 	res.status(404).json({

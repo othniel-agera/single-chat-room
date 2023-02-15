@@ -1,28 +1,36 @@
 <%- include("./partials/header.ejs")%>
-<link rel="stylesheet" href="/stylesheets/index.css" />
-</head>
-<body>
-<div class="container">
-        
-  <form id="form">
-      <div class="title">Join payment tool chat</div>
-      <div>
-          <label for="username">User Name</label>
+	<link rel="stylesheet" href="/stylesheets/index.css" />
+	</head>
 
-          <i class="fas fa-user"></i>
-          <input type="text" name="username" id="username"placeholder="Enter username"/>
-          <div class="error"></div>
-      </div> 
-      <div>
-          <label for="password">Password</label>
-          <i class="fas fa-lock"></i>
-          <input type="password" name="password" id="password"placeholder="Enter password"/>
-          <div class="error"></div>
-       </div>
-      
-       <button type="submit" id="submit">join</button>
+	<body>
+		<% if(errorMsg){%>
+			<script>
+				alert(`<%-errorMsg%>`);
+			</script>
+		<%}%>
+				<div class="container">
 
-       <div class="or">Or</div>
+					<form id="login-form" method="POST" action="/api/v1/auth/login" onsubmit="return validateForm()">
+						<div class="title">Join payment tool chat</div>
+						<div>
+							<label for="username">User Name</label>
 
-       <button type="submit" id="submit">join with facebook</button>
-<%- include("./partials/footer.ejs", { jsFile: 'index' })%>
+							<i class="fas fa-user"></i>
+							<input type="text" name="username" id="username" placeholder="Enter username" />
+							<div class="error"></div>
+						</div>
+						<div>
+							<label for="password">Password</label>
+							<i class="fas fa-lock"></i>
+							<input type="password" name="password" id="password" placeholder="Enter password" />
+							<div class="error"></div>
+						</div>
+
+						<button form="login-form" type="submit" id="login-submit">Join</button>
+
+						<div class="or">Or</div>
+
+						<button type="button" id="signup-submit">Join with facebook</button>
+					</form>
+				<div>
+<%- include("./partials/footer.ejs", { jsFile: 'login' })%>
