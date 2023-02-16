@@ -1,1 +1,2 @@
-require('./user.model');
+require("./user.model");
+require("./message.model");
