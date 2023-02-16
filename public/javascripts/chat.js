@@ -1,10 +1,7 @@
 const socket = io();
 
 (async () => {
-	const users = await axios.get(
-		`http://localhost:${process.env.PORT}/api/v1/users`
-	);
-	console.log(users);
+	const users = await axios.get(`/api/v1/users`);
 
 	const usersList = document.getElementById("users");
 
