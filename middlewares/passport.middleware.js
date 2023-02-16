@@ -19,7 +19,7 @@ const localStrategy = new LocalStrategy(async function verify(
 		}
 		const passwordMatch = await comparePasswords(password, user.password);
 		if (passwordMatch) {
-			return cb(null, user);
+			return cb(null, { id: user.id, username });
 		}
 		return cb(null, false, { message: "Incorrect username or password." });
 	} catch (err) {
