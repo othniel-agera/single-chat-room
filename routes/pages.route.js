@@ -1,13 +1,15 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const { isLoggedPages } = require("../middlewares/isLogged.midlleware");
+
+const router = express.Router();
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
+router.get("/", (req, res, next) => {
 	res.render("index", { title: "Express" });
 });
 
 /* GET login page. */
-router.get("/login", function (req, res, next) {
+router.get("/login", (req, res, next) => {
 	res.render("login", {
 		title: "Login",
 		errorMsg:
@@ -18,7 +20,9 @@ router.get("/login", function (req, res, next) {
 });
 
 /* GET chat page. */
-router.get("/chat", function (req, res, next) {
+router.get("/chat", isLoggedPages, (req, res, next) => {
+	console.log(req.session);
+	console.log(req.isAuthenticated());
 	res.render("chat", { title: "Chat" });
 });
 
