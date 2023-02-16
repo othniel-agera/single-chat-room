@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const { Schema } = mongooose;
+const { Schema } = mongoose;
 
 const msgSchema = new Schema({
   message: { type: String, required: true },
