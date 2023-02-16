@@ -76,6 +76,19 @@ class AuthController {
 
 		res.status(200).json({ success: true, data: user });
 	});
+
+	/**
+	 * @desc Get all the registered users
+	 * @route GET /api/v1/users
+	 * @access Private
+	 */
+	getUsers = asyncHandler(async (req, res) => {
+		const allUsers = await this.userLib.fetchUsers();
+		const users = allUsers.filter((user) => {
+			return user.username !== req.session.passport.user.username;
+		});
+		res.status(200).json({ success: true, data: users });
+	});
 }
 
 module.exports = new AuthController();

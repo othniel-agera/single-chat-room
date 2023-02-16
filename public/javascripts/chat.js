@@ -1,5 +1,6 @@
 const socket = io();
 
+<<<<<<< HEAD
 const chatForm = document.getElementById("chat-form");
 const chatMessages = document.querySelector(".chat-messages");
 const input = document.getElementById("input");
@@ -38,3 +39,17 @@ document.getElementById("leave-btn").addEventListener("click", () => {
   } else {
   }
 });
+=======
+(async () => {
+	const users = await axios.get(`/api/v1/users`);
+
+	const usersList = document.getElementById("users");
+
+	for (let i = 0; i < users.data.data.length; i++) {
+		const userChild = document.createElement("li");
+		const node = document.createTextNode(users.data.data[i].username);
+		userChild.appendChild(node);
+		usersList.appendChild(userChild);
+	}
+})();
+>>>>>>> 22d6edb2c9a13c007dabbb3283ca5850bfb4e40b
