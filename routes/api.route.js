@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const passport = require("../middlewares/passport.middleware");
-const { signup, getUsers } = require("../controllers/user.controller");
+const { getMe, signup, getUsers } = require("../controllers/user.controller");
 const { sendMessage } = require("../controllers/message.controller");
 const {
 	signupValidator,
@@ -32,6 +32,7 @@ router.post(
 		failureMessage: true,
 	})
 );
+router.get("/auth/me", isLoggedAPI, getMe);
 router.get("/users", isLoggedAPI, getUsers);
 
 // Messages
