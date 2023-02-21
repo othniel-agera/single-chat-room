@@ -134,12 +134,7 @@ const getTimeOnly = (dateObj) => {
 
 (async () => {
 	const { data } = await axios.get(`/api/v1/auth/me`);
-	const msg = await getMessages(1);
-	if (msg.data.success) {
-		displayMessages(msg.data.data, msg.data.pagination);
-	}
-
-	socket.on("status", (info) => {
+	socket.on("status", async (info) => {
 		const registerSend = {
 			username: data.data.username,
 			socketId: info.id,
@@ -152,6 +147,10 @@ const getTimeOnly = (dateObj) => {
 			}
 		});
 	});
+	const msg = await getMessages(1);
+	if (msg.data.success) {
+		displayMessages(msg.data.data, msg.data.pagination);
+	}
 	const users = await axios.get(`/api/v1/users`);
 	for (let i = 0; i < users.data.data.length; i++) {
 		showUserList(users.data.data[i]);

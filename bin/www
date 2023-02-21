@@ -52,11 +52,11 @@ io.on("connection", (socket) => {
 		onlines.forEach((onlineInfo) => {
 			onlinesArr.push(onlineInfo);
 		});
-		setTimeout(() => {
-			return callback({
-				onlinesArr,
-			});
-		}, 2000);
+		// setTimeout(() => {
+		return callback({
+			onlinesArr,
+		});
+		// }, 2000);
 	});
 
 	socket.on("chatMessage", (message) => {
