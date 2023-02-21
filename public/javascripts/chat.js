@@ -18,10 +18,14 @@ const outputStatus = (statusInfo) => {
 const outputMessage = (message) => {
 	const div = document.createElement("div");
 	div.classList.add("message");
-	/* div.innerHTML = ` <p class="meta">${message.sender}<span>${getTimeOnly(
-		message.timeSent
-	)}</span></p>
-  <p class="text">${message.messageText}</p>`; */
+	div.innerHTML = `
+		<p class="meta">
+			${message.sender}
+				<span>${getTimeOnly(message.timeSent)}
+				</span>
+		</p>
+		<p class="text">${message.messageText}</p>
+	`;
 	document.querySelector(".chat-messages").appendChild(div);
 };
 
@@ -96,7 +100,6 @@ const getTimeOnly = (dateObj) => {
 })();
 
 socket.on("message", (message) => {
-	console.log(message);
 	outputMessage(message);
 
 	//scroll down
@@ -112,9 +115,8 @@ chatForm.addEventListener("submit", async (e) => {
 	const sent = await postMessage(msg);
 	if (sent.data.success) {
 		outputMessage(sent.data.message);
+		socket.emit("chatMessage", sent.data.message);
 	}
 	e.target.elements.msg.value = "";
 	e.target.elements.msg.focus();
-
-	// socket.emit("chatMessage", msg);
 });
