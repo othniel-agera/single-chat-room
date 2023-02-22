@@ -167,7 +167,7 @@ const getTimeOnly = (dateObj) => {
 })();
 
 socket.on("message", (message) => {
-	outputMessage(message);
+	outputMessage(message, true);
 
 	//scroll down
 	chatMessages.scrollTop = chatMessages.scrollHeight;
